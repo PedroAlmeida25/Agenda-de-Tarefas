@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Digests;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Agenda_de_Tarefas
     {
         private int opcao;
         DAO conectar;
+        public int codigo;
 
         public ControlPessoa()
         {
@@ -47,12 +49,15 @@ namespace Agenda_de_Tarefas
                         Cadastrar();
                         break;
                     case 2:
-                        //Consultar
+                        Consultar();
                         break;
                     case 3:
-                        //Atualizar
+                        MostrarMenuAtualizar();
                         break;
                     case 4:
+                        MenuAtualizar();
+                        break;
+                    case 5:
                         //Excluir
                         break;
                     default:
@@ -76,7 +81,112 @@ namespace Agenda_de_Tarefas
             string senha = Console.ReadLine();
             conectar.Inserir(nome, telefone, endereco, email, senha);
         }//fim do método Cadastrar
-     
+        
+        public void Consultar()
+        {
+            Console.WriteLine(conectar.Consultar());
+        }//fim do método Consultar
+
+        public void MostrarMenuAtualizar()
+        {
+            Console.WriteLine("\n\nEscolha uma das opções abaixo: " +
+                              ", Nome: " +
+                              ", Telefone: " +
+                              ", Endereço: " +
+                              ", Email: " +
+                              ", Senha: ");
+            opcao = Convert.ToInt32(Console.ReadLine());
+        }//fim do método
+
+        public void MenuAtualizar()
+        {
+            int opcao = 0;
+            switch(opcao)
+            {
+                case 1:
+                    Console.WriteLine("Informe o dado do código que deseja atualizar: ");
+                    codigo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe um novo nome: ");
+                    string nome = Console.ReadLine();
+                    //Método que deseja atualizar
+                    Console.WriteLine("\n\n" + conectar.Atualizar(codigo, "nome", nome));
+                    break;
+                case 2:
+                    Console.WriteLine("Informe o dado do código que deseja atualizar: ");
+                    codigo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe um novo telefone: ");
+                    string telefone = Console.ReadLine();
+                    //Método que deseja atualizar
+                    Console.WriteLine("\n\n " + conectar.Atualizar(codigo, "telefone", telefone));
+                    break;
+                case 3:
+                    Console.WriteLine("Informe o dado do código que deseja atualizar: ");
+                    codigo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe um novo endereço: ");
+                    string endereco = Console.ReadLine();
+                    //Método que deseja atualizar
+                    Console.WriteLine("\n\n" + conectar.Atualizar(codigo, "endereço", endereco));
+                    break;
+                case 4:
+                    Console.WriteLine("Informe o dado do código que deseja atualizar");
+                    codigo= Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe um novo email: ");
+                    string email = Console.ReadLine();  
+                    //Método que deseja atualizar
+                    Console.WriteLine("\n\n" + conectar.Atualizar(codigo, "email", email));
+                    break;
+                case 5:
+                    Console.WriteLine("Informe o dado do código que deseja atualizar: ");
+                    codigo = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe uma nova senha: ");
+                    string senha = Console.ReadLine();
+                    //Método que deseja atualizar
+                    Console.WriteLine("\n\n" + conectar.Atualizar(codigo, "senha", senha));
+                    break;
+                default:
+                    Console.WriteLine("Opção escolhida não é válida!");
+                    break;
+            }//fimn do escolha
+        }//fim do método
+
+        public void Excluir()
+        {
+            Console.WriteLine("Informe um código: ");
+            codigo = Convert.ToInt32(Console.ReadLine());
+            //Utilizar o método excluir
+            Console.WriteLine("\n\n" + conectar.Excluir(codigo));
+        }//fim do método
+
+        public void MenuTar()
+        {
+            Console.WriteLine("Escolha uma das opções abaixo: \n" +
+                             ", Nome da Tarefa: " +
+                             ", Data e Hora da tarefa: ");
+            opcao = Convert.ToInt32(Console.ReadLine());    
+        }//fim do método
+
+        public void OperacaoTar()
+        {
+            do
+            {
+                MenuTar();
+                switch (ConsultarOpcao)
+                {
+                    case 1:
+                        //Cadastrar Tarefa
+                        break;
+                    case 2:
+                        //Consultar Tarefa
+                        break;
+                    case 3:
+                        //Atualizar Tarefa
+                        break;
+                    case 4:
+                        //Excluir Tarefa
+                        break;
+                }//fim do switch
+            } while (ConsultarOpcao != 4);
+        }//fim do método
 
     }//fim da classe
 }//fim do projeto

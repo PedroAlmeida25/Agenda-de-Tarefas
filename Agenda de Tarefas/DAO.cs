@@ -103,6 +103,54 @@ namespace Agenda_de_Tarefas
 
             leitura.Close();//Encerrando o acesso ao Banco de Dados
         }//fim do método Preencher
+
+        //Método para consultar TODOS os dados do Banco de Dados
+
+        public string Consultar()
+        {
+            //Preencher o vetor
+            PreencherVetor();
+            msg = "";
+            for (i = 0; i < contador; i++)
+            {
+                msg += "\n\nCódigo: " + codigo[i] +
+                        ", Nome: " + nome[i] +
+                        ", Telefone: " + telefone[i] +
+                        ", Endereço: " + endereco[i] +
+                        ", Email: " + email[i] +
+                        ", Senha: " + senha[i];
+            }//fim do for
+
+            return msg;//Mostrar na tela o resultado da consulta
+        }//fim do método
+
+        public string Consultar(int cod)
+        {
+            PreencherVetor();
+
+            for(i=0; i < contador; i++)
+            {
+                if (codigo[i] == cod)
+                {
+                    msg = "\n\nCódigo: " + codigo[i] +
+                          ", Nome: " + nome[i] +
+                          ", Telefone: " + telefone[i] +
+                          ", Endereço: " + endereco[i] +
+                          ", Email: " + email[i] +
+                          ", Senha: " + senha[i];
+                    return msg;
+                }//fim do if
+            }//fim do for
+            return "Código informado não encontrado!";
+        }//fim do método
+
+        public string Atualizar(int cod, string campo, string dado)
+        {
+            try
+            {
+                string query = "update usuario set " + campo + " = '" + dado + "' where dado = '"
+            }
+        }
        
 
         
